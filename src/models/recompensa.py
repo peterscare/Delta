@@ -1,20 +1,22 @@
+# src/models/recompensa.py
+
+
 class Recompensa:
-    def __init__(self, id, nome, descricao, custo_deltas, tipo, estoque=None):
-        """
-        id: Identificador único da recompensa.
-        nome: Nome atrativo (ex: 'Mentoria com Veterano').
-        descricao: Explicação do benefício.
-        custo_deltas: Valor necessário para o resgate.
-        tipo: Categoria (ex: 'Institucional', 'Certificado', 'Cupom').
-        estoque: Quantidade disponível (opcional).
-        """
+    """Representação OO de uma recompensa (os dados ficam em
+    src/data/recompensas.py como dicts)."""
+
+    def __init__(self, id, nome, descricao, custo_deltas, tipo,
+                 parceiro="Projeto Delta", ativa=True, depende_validacao=False,
+                 icone="🎁"):
         self.id = id
         self.nome = nome
         self.descricao = descricao
         self.custo_deltas = custo_deltas
         self.tipo = tipo
-        self.estoque = estoque
+        self.parceiro = parceiro
+        self.ativa = ativa
+        self.depende_validacao = depende_validacao
+        self.icone = icone
 
     def pode_resgatar(self, saldo_usuario):
-        """Verifica se o aluno tem Deltas suficientes para a troca."""
-        return saldo_usuario >= self.custo_deltas
+        return self.ativa and saldo_usuario >= self.custo_deltas
