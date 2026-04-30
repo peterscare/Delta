@@ -118,13 +118,7 @@ def render():
         carrossel_html = '<div class="delta-h-scroll">'
         for reel in feed:
             assistido = "✓ visto" if reel["id"] in user.reels_assistidos else f"+{reel['recompensa_deltas']}Δ"
-            carrossel_html += f'''
-                <div class="delta-mini-card">
-                    <div class="delta-mini-card-thumb">{emoji_tema(reel['tema_calculo'])}</div>
-                    <div class="delta-mini-card-title">{truncar(reel['titulo'], 50)}</div>
-                    <div class="delta-mini-card-meta">{reel['duracao_segundos']}s · {assistido}</div>
-                </div>
-            '''
+            carrossel_html += f'<div class="delta-mini-card"><div class="delta-mini-card-thumb">{emoji_tema(reel["tema_calculo"])}</div><div class="delta-mini-card-title">{truncar(reel["titulo"], 50)}</div><div class="delta-mini-card-meta">{reel["duracao_segundos"]}s · {assistido}</div></div>'
         carrossel_html += "</div>"
         st.markdown(carrossel_html, unsafe_allow_html=True)
 
