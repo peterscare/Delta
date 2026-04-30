@@ -107,17 +107,12 @@ def render():
         unsafe_allow_html=True,
     )
 
-    grid_html = '<div class="delta-h-scroll">'
+   grid_html = '<div class="delta-h-scroll">'
     for i, r in enumerate(feed):
         if i == st.session_state.reel_index:
             continue
         assistido = "✓ visto" if r["id"] in user.reels_assistidos else f"+{r['recompensa_deltas']}Δ"
-        grid_html += f'''
-            <div class="delta-mini-card">
-                <div class="delta-mini-card-thumb">{emoji_tema(r['tema_calculo'])}</div>
-                <div class="delta-mini-card-title">{r['titulo'][:48]}</div>
-                <div class="delta-mini-card-meta">{r['duracao_segundos']}s · {assistido}</div>
-            </div>
-        '''
+        grid_html += f'<div class="delta-mini-card"><div class="delta-mini-card-thumb">{emoji_tema(r["tema_calculo"])}</div><div class="delta-mini-card-title">{r["titulo"][:48]}</div><div class="delta-mini-card-meta">{r["duracao_segundos"]}s · {assistido}</div></div>'
+    grid_html += "</div>"
     grid_html += "</div>"
     st.markdown(grid_html, unsafe_allow_html=True)
